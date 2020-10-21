@@ -1,12 +1,8 @@
 #! /usr/bin/env python3
 #coding: utf-8
-
-from smbus2 import SMBus
 import time
 
-# bus_number  = 1
-# i2c_address = 0x76
-# bus = SMBus(bus_number)
+# BME280: Slave Address - 0x76
 
 class BME280:
         # usage: hoge = BME($SMBus)
@@ -21,7 +17,7 @@ class BME280:
                 __setup()
                 __get_calib_param()
                 
-        def readData():
+        def readData(self):
 	        data = []
 	        for i in range (0xF7, 0xF7+8):
 		        data.append(bus.read_byte_data(i2c_address,i))
@@ -31,10 +27,10 @@ class BME280:
 	                
                 return (__compensate_T(temp_raw),__compensate_P(pres_raw),__compensate_H(hum_ra))
 
-        def __writeReg(reg_address, data):
+        def __writeReg(self,reg_address, data):
 	        bus.write_byte_data(i2c_address,reg_address,data)
 
-        def __get_calib_param():
+        def __get_calib_param(self):
 	        calib = []
 	        
 	        for i in range (0x88,0x88+24):
@@ -74,7 +70,7 @@ class BME280:
 		        if digH[i] & 0x8000:
 			        digH[i] = (-digH[i] ^ 0xFFFF) + 1  
 
-        def __compensate_P(adc_P):
+        def __compensate_P(self, adc_P):
                 pressure = 0.0
             
                 v1 = (self.t_fine / 2.0) - 64000.0
@@ -97,7 +93,7 @@ class BME280:
 
                 print("pressure : %7.2f hPa" % (pressure/100))
 
-        def __compensate_T(adc_T):
+        def __compensate_T(self, adc_T):
 
                 v1 = (adc_T / 16384.0 - digT[0] / 1024.0) * digT[1]
                 v2 = (adc_T / 131072.0 - digT[0] / 8192.0) * (adc_T / 131072.0 - digT[0] / 8192.0) * digT[2]
@@ -105,7 +101,7 @@ class BME280:
                 temperature = self.t_fine / 5120.0
                 print ("temp : %-6.2f ℃" % (temperature))
 
-        def __compensate_H(adc_H):
+        def __compensate_H(self, adc_H):
      
                 var_h = self.t_fine - 76800.0
                 if var_h != 0:
@@ -119,7 +115,7 @@ class BME280:
                         var_h = 0.0
                         print("hum : %6.2f ％" % (var_h))
 
-        def __setup():
+        def __setup(self):
                 osrs_t = 1			#Temperature oversampling x 1
                 osrs_p = 1			#Pressure oversampling x 1
                 osrs_h = 1			#Humidity oversampling x 1
