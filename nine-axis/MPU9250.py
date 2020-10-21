@@ -1,16 +1,14 @@
 #! /usr/bin/env python3
 #coding: utf-8
 
-from smbus2 import SMBus
+# from smbus2 import SMBus
 
 def __word_swap(data):
     return (data & 0xFF00 >> 8) | (data & 0x00FF << 8)
 
 class MPU9250:
-    def __init__(self, bus, bus_number, i2c_address):
-        self.bus = bus
-        self.bus_number = bus_number
-        self.i2c_address = i2c_address
+    def __init__(self, bus):
+        self.bus = bus # SMBus instance
         self.GYRO_ADDR = 0b1101000 # AD0: L
         self.ACCEL_ADDR = 0b1101000
         self.COMPASS_ADDR = 0b1100

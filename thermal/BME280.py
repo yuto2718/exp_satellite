@@ -9,13 +9,11 @@ import time
 # bus = SMBus(bus_number)
 
 class BME280:
-        # usage: hoge = BME($i2c_address, $SMBus)
+        # usage: hoge = BME($SMBus)
         #        result = hoge.readData() :format - tupple(temp.,pres.,humid.)
-        # how to get i2c_address
-        # bash$ i2cdetect $busnumber 
-        def __init__(self, bus, i2c_address):
+        def __init__(self, bus):
                 self.bus = bus
-                self.i2c_address = i2c_address
+                self.i2c_address = 0x76
                 self.digT = []
                 self.digP = []
                 self.digH = []
