@@ -16,9 +16,9 @@ class MONO:
         else:
             self.connect()
 
-    def connect(self):
+    def connect(self, dev):
         try:
-            self.ser = serial.Serial(dev, 9600)
+            self.ser = serial.Serial(dev, 115200)
             print("open:{0}".format(self.__PORT))
 
         except:
