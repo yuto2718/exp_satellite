@@ -9,7 +9,8 @@ import time
 # bus = SMBus(bus_number)
 
 class BME280:
-        # usage: BME($bus_number, $i2c_address, $SMBus) 
+        # usage: hoge = BME($bus_number, $i2c_address, $SMBus)
+        #        result = hoge.readData() :format - tupple(temp.,pres.,humid.)
         # bash$ i2cdetect -l ; i2cdetect $busnumber 
         def __init__(self, bus, bus_number, i2c_address):
                 self.bus = bus
@@ -30,9 +31,7 @@ class BME280:
 	                temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
 	                hum_raw  = (data[6] << 8)  |  data[7]
 	                
-                __compensate_T(temp_raw)
-	        __compensate_P(pres_raw)
-	        __compensate_H(hum_raw)
+                return (__compensate_T(temp_raw),__compensate_P(pres_raw),__compensate_H(hum_ra))
 
         def __writeReg(reg_address, data):
 	        bus.write_byte_data(i2c_address,reg_address,data)
