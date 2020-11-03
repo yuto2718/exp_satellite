@@ -17,24 +17,24 @@ class MPU9250:
         self.GYRO_OFFSET = 0x3B
         self.ACCEL_OFFSET = 0x3B + 0x06
         self.COMPASS_OFFSET = 0x03
-        __setup()
+        self.__setup()
         
     def getGyro(self):
-        x = __readWord(GYRO_ADDR, GYRO_OFFSET)
-        y = __readWord(GYRO_ADDR, GYRO_OFFSET + 0x02)
-        z = __readWord(GYRO_ADDR, GYRO_OFFSET + 0x04)
+        x = self.__readWord(self.GYRO_ADDR, self.GYRO_OFFSET)
+        y = self.__readWord(self.GYRO_ADDR, self.GYRO_OFFSET + 0x02)
+        z = self.__readWord(self.GYRO_ADDR, self.GYRO_OFFSET + 0x04)
         return (x, y, z)
 
     def getAccel(self):
-        x = __readWord(ACCEL_ADDR, ACCEL_OFFSET)
-        y = __readWord(ACCEL_ADDR, ACCEL_OFFSET + 0x02)
-        z = __readWord(ACCEL_ADDR, ACCEL_OFFSET + 0x04)
+        x = self.__readWord(self.ACCEL_ADDR, self.ACCEL_OFFSET)
+        y = self.__readWord(self.ACCEL_ADDR, self.ACCEL_OFFSET + 0x02)
+        z = self.__readWord(self.ACCEL_ADDR, self.ACCEL_OFFSET + 0x04)
         return (x, y, z)
 
     def getCompass(self):
-        x = __word_swap(__readWord(COMPASS_ADDR, COMPASS_OFFSET))
-        y = __word_swap(__readWord(COMPASS_ADDR, COMPASS_OFFSET + 0x02))
-        z = __word_swap(__readWord(COMPASS_ADDR, COMPASS_OFFSET + 0x04))        
+        x = self.__word_swap(self.__readWord(self.COMPASS_ADDR, self.COMPASS_OFFSET))
+        y = self.__word_swap(self.__readWord(self.COMPASS_ADDR, self.COMPASS_OFFSET + 0x02))
+        z = self.__word_swap(self.__readWord(self.COMPASS_ADDR, self.COMPASS_OFFSET + 0x04))        
         return (x, y, z)
 
     def __writeReg(self, i2c_address, reg_address, data):
@@ -46,6 +46,6 @@ class MPU9250:
         return (msB << 8) | lsB
 
     def __setup(self):
-        __writeReg(GYRO_ADDR,0x6b,0x00)
-        __writeReg(GYRO_ADDR,0x37,0x02)
-        __writeReg(COMPASS_ADDR,0x0A,0x12)
+        self.__writeReg(self.GYRO_ADDR,0x6b,0x00)
+        self.__writeReg(self.GYRO_ADDR,0x37,0x02)
+        self.__writeReg(self.COMPASS_ADDR,0x0A,0x12)
