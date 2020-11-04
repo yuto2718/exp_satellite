@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 #coding: utf-8
 import time
-import smbus2
+#import smbus2
 
 # BME280: Slave Address - 0x76
 

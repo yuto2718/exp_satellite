@@ -14,7 +14,7 @@ importlib.reload(BME280)
 importlib.reload(GYSFDMAXB)
 importlib.reload(MONO)
 
-import smbus
+import smbus2
 import time
 import serial
 
