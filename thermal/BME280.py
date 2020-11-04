@@ -23,12 +23,12 @@ class BME280:
 	        data = []
 	        for i in range (0xF7, 0xF7+8):
 		        data.append(self.bus.read_byte_data(self.i2c_address,i))
-                
+
 	        pres_raw = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4)
 	        temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
             hum_raw  = (data[6] << 8)  |  data[7]
 
-                return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_ra))
+            return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_ra))
 
         def __writeReg(self,reg_address, data):
 	        self.bus.write_byte_data(self.i2c_address,reg_address,data)
