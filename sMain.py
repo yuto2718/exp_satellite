@@ -33,4 +33,4 @@ for i in range(1000):
     acl = array(IMU.getAccel())*0.2+pacl*0.8
     base.write(str(acl[0]))
     pacl = acl
-    time.sleep(0.05)
+    time.sleep(0.1)
