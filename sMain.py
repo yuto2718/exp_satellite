@@ -2,8 +2,8 @@ import sys
 sys.path.append("/home/pi/Documents/exp_satellite")
 
 from nineAxis import MPU9250
-from thermal import BME280
-from GPS import GYSFDMAXB
+#from thermal import BME280
+#from GPS import GYSFDMAXB
 from MONO import MONO
 
 import importlib
@@ -23,7 +23,7 @@ i2c = smbus.SMBus(1)
 gpsserial = erial.Serial(GPSPORT, 115200)
 
 base = MONO.MONO(MONOPORT)
-#IMU = MPU9250.MPU9250(i2c)
+IMU = MPU9250.MPU9250(i2c)
 #thermal = BME280.BME280(i2c)
 #gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
 
