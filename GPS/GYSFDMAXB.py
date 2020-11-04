@@ -1,6 +1,6 @@
 import serial
 import time
-from micropyGPS import MicropyGPS
+import MicropyGPS
 
 # load packet per update()
 PACKET_RATE = 20
@@ -9,13 +9,13 @@ class GYSFDMAXB:
     # serial : serial.Serial instance
     def __init__(self, serial):
         self.serial = serial
-        self.gps = MicropyGPS()
+        self.gps = MicropyGPS.MicropyGPS()
         self.update()
 
     def __del__(self):
         del self.serial
         del self.gps
-        
+
     def update(self):
         for i in range(PACKET_RATE):
             sentence = self.serial.readline().decode('utf-8')
@@ -38,7 +38,7 @@ class GYSFDMAXB:
 
     def getGeoid(self):
         return self.gps.geoid
-    
+
     def getSpeed(self):
         return self.gps.speed
 

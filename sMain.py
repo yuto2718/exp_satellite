@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/pi/Documents/exp_satellite')
+sys.path.append("/home/pi/Documents/exp_satellite")
 
 from nineAxis import MPU9250
 #from thermal import BME280
