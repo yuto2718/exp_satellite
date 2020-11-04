@@ -1,6 +1,5 @@
 #*-encoding:utf-8
-from numpy import *
-from matplotlib.pyplot import*
+
 import cv2
 import serial
 #import gc
