@@ -11,29 +11,34 @@ from PyQt5.QtGui import QPixmap, QImage
 
 class MONO:
     def __init__(self, port = None):
+        self.isConnected = False
+        self.__PORT = None
         if port is None:
             pass
         else:
-            self.connect()
+            self.connect(port)
 
     def connect(self, dev):
         try:
+            self.__PORT = dev
             self.ser = serial.Serial(dev, 115200)
-            print("open:{0}".format(self.__PORT))
-            self.ser.read_All()
+            print("open:"+dev)
+            #self.ser.read_All()
+            self.isConnected = True
 
         except:
             print("can't conect")
 
-    def write(str):
-        self.ser.write(bytes("{0:s}\n".format(str), "UTF-8"))
+    def write(self, data):
+        self.ser.write(bytes("{0:s}\n".format(str(data)), "UTF-8"))
 
     def readLine(self):
-        return self.ser.read_line().decode()
+        return self.ser.readline().decode()
 
     def __del__(self):
         self.ser.close()
-        print("closed:{0}".format(self.__PORT))
+        del self.ser
+        #print("closed:{0}".format(self.__PORT))
 
     def sendImg(self, im):
         encodeParam = [int(cv2.IMWRITE_JPEG_QUALITY),90]
