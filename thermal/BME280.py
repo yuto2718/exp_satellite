@@ -91,9 +91,9 @@ class BME280:
                         pressure = (pressure * 2.0) / v1
                 else:
                         pressure = (pressure / v1) * 2
-                        v1 = (self.digP[8] * (((pressure / 8.0) * (pressure / 8.0)) / 8192.0)) / 4096
-                        v2 = ((pressure / 4.0) * self.digP[7]) / 8192.0
-                        pressure = pressure + ((v1 + v2 + self.digP[6]) / 16.0)
+                v1 = (self.digP[8] * (((pressure / 8.0) * (pressure / 8.0)) / 8192.0)) / 4096
+                v2 = ((pressure / 4.0) * self.digP[7]) / 8192.0
+                pressure = pressure + ((v1 + v2 + self.digP[6]) / 16.0)
                 return (pressure/100)
 
         def __compensate_T(self, adc_T):
