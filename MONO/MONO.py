@@ -20,6 +20,7 @@ class MONO:
         try:
             self.ser = serial.Serial(dev, 115200)
             print("open:{0}".format(self.__PORT))
+            self.ser.read_All()
 
         except:
             print("can't conect")
