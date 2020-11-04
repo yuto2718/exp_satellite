@@ -21,7 +21,7 @@ import serial
 MONOPORT  = "/dev/ttyUSB0"
 GPSPORT = "/dev/ttyAMA0"
 
-i2c = smbus.SMBus(1)
+i2c = smbus2.SMBus(1)
 gpsserial = serial.Serial(GPSPORT, 115200)
 
 base = MONO.MONO(MONOPORT)
