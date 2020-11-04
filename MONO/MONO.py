@@ -4,7 +4,6 @@ import cv2
 import serial
 #import gc
 #import base64
-from PyQt5.QtGui import QPixmap, QImage
 
 
 
