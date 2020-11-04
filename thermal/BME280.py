@@ -20,28 +20,28 @@ class BME280:
                 self.__get_calib_param()
 
         def readData(self):
-            data = []
-            for i in range (0xF7, 0xF7+8):
-                data.append(self.bus.read_byte_data(self.i2c_address,i))
+                data = []
+                for i in range (0xF7, 0xF7+8):
+                    data.append(self.bus.read_byte_data(self.i2c_address,i))
 
-            pres_raw = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4)
-            temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
-            hum_raw  = (data[6] << 8)  |  data[7]
+                pres_raw = (data[0] << 12) | (data[1] << 4) | (data[2] >> 4)
+                temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
+                hum_raw  = (data[6] << 8)  |  data[7]
 
-            return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_ra))
+                return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_ra))
 
         def __writeReg(self,reg_address, data):
-            self.bus.write_byte_data(self.i2c_address,reg_address,data)
+                self.bus.write_byte_data(self.i2c_address,reg_address,data)
 
         def __get_calib_param(self):
-            calib = []
+                calib = []
 
-            for i in range (0x88,0x88+24):
-                calib.append(self.bus.read_byte_data(self.i2c_address,i))
+                for i in range (0x88,0x88+24):
+                        calib.append(self.bus.read_byte_data(self.i2c_address,i))
 
-            calib.append(self.bus.read_byte_data(self.i2c_address,0xA1))
-            for i in range (0xE1,0xE1+7):
-                calib.append(self.bus.read_byte_data(self.i2c_address,i))
+                calib.append(self.bus.read_byte_data(self.i2c_address,0xA1))
+                for i in range (0xE1,0xE1+7):
+                        calib.append(self.bus.read_byte_data(self.i2c_address,i))
 
             self.digT.append((calib[1] << 8) | calib[0])
             self.digT.append((calib[3] << 8) | calib[2])
@@ -62,17 +62,17 @@ class BME280:
             self.digH.append((calib[30]<< 4) | ((calib[29] >> 4) & 0x0F))
             self.digH.append( calib[31] )
 
-	        for i in range(1,2):
-		        if self.digT[i] & 0x8000:
-			        self.digT[i] = (-self.digT[i] ^ 0xFFFF) + 1
+        for i in range(1,2):
+                if self.digT[i] & 0x8000:
+                        self.digT[i] = (-self.digT[i] ^ 0xFFFF) + 1
 
-	        for i in range(1,8):
-		        if self.digP[i] & 0x8000:
-			        self.digP[i] = (-self.digP[i] ^ 0xFFFF) + 1
+        for i in range(1,8):
+	        if self.digP[i] & 0x8000:
+		        self.digP[i] = (-self.digP[i] ^ 0xFFFF) + 1
 
-	        for i in range(0,6):
-		        if self.digH[i] & 0x8000:
-			        self.digH[i] = (-self.digH[i] ^ 0xFFFF) + 1
+        for i in range(0,6):
+                if self.digH[i] & 0x8000:
+                        self.digH[i] = (-self.digH[i] ^ 0xFFFF) + 1
 
         def __compensate_P(self, adc_P):
                 pressure = 0.0
@@ -94,18 +94,13 @@ class BME280:
                         v1 = (self.digP[8] * (((pressure / 8.0) * (pressure / 8.0)) / 8192.0)) / 4096
                         v2 = ((pressure / 4.0) * self.digP[7]) / 8192.0
                         pressure = pressure + ((v1 + v2 + self.digP[6]) / 16.0)
-
-
-                # print("pressure : %7.2f hPa" % (pressure/100))
                 return (pressure/100)
 
         def __compensate_T(self, adc_T):
-
                 v1 = (adc_T / 16384.0 - self.digT[0] / 1024.0) * self.digT[1]
                 v2 = (adc_T / 131072.0 - self.digT[0] / 8192.0) * (adc_T / 131072.0 - self.digT[0] / 8192.0) * self.digT[2]
                 self.self.t_fine = v1 + v2
                 temperature = self.self.t_fine / 5120.0
-                # print ("temp : %-6.2f ℃" % (temperature))
                 return temperature
 
         def __compensate_H(self, adc_H):
@@ -119,17 +114,16 @@ class BME280:
                         var_h = 100.0
                 elif var_h < 0.0:
                         var_h = 0.0
-                # print("hum : %6.2f ％" % (var_h))
                 return var_h
 
         def __setup(self):
-                osrs_t = 1			#Temperature oversampling x 1
-                osrs_p = 1			#Pressure oversampling x 1
-                osrs_h = 1			#Humidity oversampling x 1
-                mode   = 3			#Normal mode
-                t_sb   = 5			#Tstandby 1000ms
-                filter = 0			#Filter off
-                spi3w_en = 0			#3-wire SPI Disable
+                osrs_t = 1            #Temperature oversampling x 1
+                osrs_p = 1            #Pressure oversampling x 1
+                osrs_h = 1            #Humidity oversampling x 1
+                mode   = 3            #Normal mode
+                t_sb   = 5            #Tstandby 1000ms
+                filter = 0            #Filter off
+                spi3w_en = 0            #3-wire SPI Disable
 
                 ctrl_meas_reg = (osrs_t << 5) | (osrs_p << 2) | mode
                 config_reg    = (t_sb << 5) | (filter << 2) | spi3w_en
