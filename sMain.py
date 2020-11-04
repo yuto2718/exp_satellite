@@ -8,8 +8,8 @@ from MONO import MONO
 
 import importlib
 importlib.reload(MPU9250)
-importlib.reload(BME280)
-importlib.reload(GYSFDMAXB)
+#importlib.reload(BME280)
+#importlib.reload(GYSFDMAXB)
 importlib.reload(MONO)
 
 import smbus
