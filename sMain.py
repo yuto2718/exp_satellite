@@ -5,6 +5,8 @@ from nineAxis import MPU9250
 #from thermal import BME280
 #from GPS import GYSFDMAXB
 from MONO import MONO
+from nunpy import*
+
 
 import importlib
 importlib.reload(MPU9250)
