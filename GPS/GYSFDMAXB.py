@@ -1,6 +1,6 @@
 import serial
 import time
-from GPS import MicropyGPS
+from MicropyGPS import MicropyGPS
 
 # load packet per update()
 PACKET_RATE = 20
