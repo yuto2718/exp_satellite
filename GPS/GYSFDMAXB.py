@@ -1,6 +1,6 @@
 import serial
 import time
-import MicropyGPS
+import micropyGPS
 
 # load packet per update()
 PACKET_RATE = 20
@@ -9,7 +9,7 @@ class GYSFDMAXB:
     # serial : serial.Serial instance
     def __init__(self, serial):
         self.serial = serial
-        self.gps = MicropyGPS.MicropyGPS()
+        self.gps = micropyGPS.MicropyGPS()
         self.update()
 
     def __del__(self):
