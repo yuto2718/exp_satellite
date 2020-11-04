@@ -77,7 +77,7 @@ class BME280:
         def __compensate_P(self, adc_P):
                 pressure = 0.0
 
-                v1 = (self.self.t_fine / 2.0) - 64000.0
+                v1 = (self.t_fine / 2.0) - 64000.0
                 v2 = (((v1 / 4.0) * (v1 / 4.0)) / 2048) * self.digP[5]
                 v2 = v2 + ((v1 * self.digP[4]) * 2.0)
                 v2 = (v2 / 4.0) + (self.digP[3] * 65536.0)
@@ -99,12 +99,12 @@ class BME280:
         def __compensate_T(self, adc_T):
                 v1 = (adc_T / 16384.0 - self.digT[0] / 1024.0) * self.digT[1]
                 v2 = (adc_T / 131072.0 - self.digT[0] / 8192.0) * (adc_T / 131072.0 - self.digT[0] / 8192.0) * self.digT[2]
-                self.self.t_fine = v1 + v2
-                temperature = self.self.t_fine / 5120.0
+                self.t_fine = v1 + v2
+                temperature = self.t_fine / 5120.0
                 return temperature
 
         def __compensate_H(self, adc_H):
-                var_h = self.self.t_fine - 76800.0
+                var_h = self.t_fine - 76800.0
                 if var_h != 0:
                         var_h = (adc_H - (self.digH[3] * 64.0 + self.digH[4]/16384.0 * var_h)) * (self.digH[1] / 65536.0 * (1.0 + self.digH[5] / 67108864.0 * var_h * (1.0 + self.digH[2] / 67108864.0 * var_h)))
                 else:
