@@ -44,7 +44,7 @@ class MPU9250:
         return (x, y, z)
 
     def __writeReg(self, i2c_address, reg_address, data):
-        self.bus.write_byte_date(i2c_address, reg_address, data)
+        self.bus.write_byte_data(i2c_address, reg_address, data)
 
     def __readWord(self, i2c_addr, reg_addr):
         msB = self.bus.read_byte_data(i2c_addr, reg_addr)
