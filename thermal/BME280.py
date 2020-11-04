@@ -5,6 +5,7 @@ import smbus2
 
 # BME280: Slave Address - 0x76
 
+
 class BME280:
         # usage: hoge = BME($SMBus)
         #        result = hoge.readData() :format - tupple(temp.,pres.,humid.)
@@ -135,5 +136,3 @@ class BME280:
                 self.__writeReg(0xF2,ctrl_hum_reg)
                 self.__writeReg(0xF4,ctrl_meas_reg)
                 self.__writeReg(0xF5,config_reg)
-
-

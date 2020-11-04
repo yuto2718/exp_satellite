@@ -4,7 +4,12 @@
 # MPU9248: Slave Address - 0b1101000(gyro,accel.) & 0b1100(compass)
 
 def __word_swap(data):
-    return (data & 0xFF00 >> 8) | (data & 0x00FF << 8)
+    ret = data << 8
+    ret = ret | (data >> 8)
+    return 0xFFFF & ret
+
+#def __word_swap(data):
+#    return (data & 0xFF00 >> 8) | (data & 0x00FF << 8)
 
 
 class MPU9250:
