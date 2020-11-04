@@ -31,6 +31,6 @@ IMU = MPU9250.MPU9250(i2c)
 pacl = 0
 for i in range(1000):
     acl = array(IMU.getAccel())*0.2+pacl*0.8
-    base.write(str(acl[0]))
+    base.write(str(acl[2]))
     pacl = acl
     time.sleep(0.1)
