@@ -36,7 +36,7 @@ for i in range(1000):
     base.write(str(data[0]))
     pdata = data
     time.sleep(0.1)
-"""
+
 
 """
 pacl = 0
