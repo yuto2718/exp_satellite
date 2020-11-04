@@ -28,7 +28,7 @@ class BME280:
                 temp_raw = (data[3] << 12) | (data[4] << 4) | (data[5] >> 4)
                 hum_raw  = (data[6] << 8)  |  data[7]
 
-                return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_ra))
+                return (self.__compensate_T(temp_raw),self.__compensate_P(pres_raw),self.__compensate_H(hum_raw))
 
         def __writeReg(self,reg_address, data):
                 self.bus.write_byte_data(self.i2c_address,reg_address,data)
@@ -43,36 +43,36 @@ class BME280:
                 for i in range (0xE1,0xE1+7):
                         calib.append(self.bus.read_byte_data(self.i2c_address,i))
 
-            self.digT.append((calib[1] << 8) | calib[0])
-            self.digT.append((calib[3] << 8) | calib[2])
-            self.digT.append((calib[5] << 8) | calib[4])
-            self.digP.append((calib[7] << 8) | calib[6])
-            self.digP.append((calib[9] << 8) | calib[8])
-            self.digP.append((calib[11]<< 8) | calib[10])
-            self.digP.append((calib[13]<< 8) | calib[12])
-            self.digP.append((calib[15]<< 8) | calib[14])
-            self.digP.append((calib[17]<< 8) | calib[16])
-            self.digP.append((calib[19]<< 8) | calib[18])
-            self.digP.append((calib[21]<< 8) | calib[20])
-            self.digP.append((calib[23]<< 8) | calib[22])
-            self.digH.append( calib[24] )
-            self.digH.append((calib[26]<< 8) | calib[25])
-            self.digH.append( calib[27] )
-            self.digH.append((calib[28]<< 4) | (0x0F & calib[29]))
-            self.digH.append((calib[30]<< 4) | ((calib[29] >> 4) & 0x0F))
-            self.digH.append( calib[31] )
+                self.digT.append((calib[1] << 8) | calib[0])
+                self.digT.append((calib[3] << 8) | calib[2])
+                self.digT.append((calib[5] << 8) | calib[4])
+                self.digP.append((calib[7] << 8) | calib[6])
+                self.digP.append((calib[9] << 8) | calib[8])
+                self.digP.append((calib[11]<< 8) | calib[10])
+                self.digP.append((calib[13]<< 8) | calib[12])
+                self.digP.append((calib[15]<< 8) | calib[14])
+                self.digP.append((calib[17]<< 8) | calib[16])
+                self.digP.append((calib[19]<< 8) | calib[18])
+                self.digP.append((calib[21]<< 8) | calib[20])
+                self.digP.append((calib[23]<< 8) | calib[22])
+                self.digH.append( calib[24] )
+                self.digH.append((calib[26]<< 8) | calib[25])
+                self.digH.append( calib[27] )
+                self.digH.append((calib[28]<< 4) | (0x0F & calib[29]))
+                self.digH.append((calib[30]<< 4) | ((calib[29] >> 4) & 0x0F))
+                self.digH.append( calib[31] )
 
-        for i in range(1,2):
-                if self.digT[i] & 0x8000:
-                        self.digT[i] = (-self.digT[i] ^ 0xFFFF) + 1
+                for i in range(1,2):
+                        if self.digT[i] & 0x8000:
+                                self.digT[i] = (-self.digT[i] ^ 0xFFFF) + 1
 
-        for i in range(1,8):
-	        if self.digP[i] & 0x8000:
-		        self.digP[i] = (-self.digP[i] ^ 0xFFFF) + 1
+                for i in range(1,8):
+                        if self.digP[i] & 0x8000:
+                                self.digP[i] = (-self.digP[i] ^ 0xFFFF) + 1
 
-        for i in range(0,6):
-                if self.digH[i] & 0x8000:
-                        self.digH[i] = (-self.digH[i] ^ 0xFFFF) + 1
+                for i in range(0,6):
+                        if self.digH[i] & 0x8000:
+                                self.digH[i] = (-self.digH[i] ^ 0xFFFF) + 1
 
         def __compensate_P(self, adc_P):
                 pressure = 0.0
