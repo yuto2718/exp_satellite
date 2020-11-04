@@ -26,5 +26,6 @@ base = MONO.MONO(MONOPORT)
 IMU = MPU9250.MPU9250(i2c)
 #thermal = BME280.BME280(i2c)
 #gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
-
-base.write("fuck_abo")
+for i in range(100):
+    acl = IMU.getAccel()
+    base.write(str(i)+":"+str(acl[0]))
