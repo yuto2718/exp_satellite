@@ -26,7 +26,7 @@ base = MONO.MONO(MONOPORT)
 IMU = MPU9250.MPU9250(i2c)
 #thermal = BME280.BME280(i2c)
 #gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
-for i in range(100):
+for i in range(1000):
     acl = IMU.getAccel()
-    base.write(str(i)+":"+str(acl[0]))
-    time.sleep(0.1)
+    base.write(str(acl[0]))
+    time.sleep(0.2)
