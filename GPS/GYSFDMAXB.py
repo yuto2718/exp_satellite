@@ -20,7 +20,7 @@ class GYSFDMAXB:
         for i in range(PACKET_RATE):
             sentence = self.serial.readline().decode('utf-8')
             for x in sentence:
-                self.gps.update()
+                self.gps.update(x)
 
     # Getters are berrow
     # https://github.com/inmcm/micropyGPS
