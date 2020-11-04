@@ -11,8 +11,8 @@ class MPU9250:
     # bus: SMBus instance
     def __init__(self, bus):
         self.bus = bus
-        self.GYRO_ADDR = 0b1101000  # AD0: L
-        self.ACCEL_ADDR = 0b1101000
+        self.GYRO_ADDR = 0b1101001   # AD0: H
+        self.ACCEL_ADDR = 0b1101001  # AD0: H
         self.COMPASS_ADDR = 0b1100
 
         self.GYRO_OFFSET = 0x3B
