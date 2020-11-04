@@ -29,3 +29,4 @@ IMU = MPU9250.MPU9250(i2c)
 for i in range(100):
     acl = IMU.getAccel()
     base.write(str(i)+":"+str(acl[0]))
+    time.sleep(0.1)
