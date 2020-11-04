@@ -30,7 +30,7 @@ IMU = MPU9250.MPU9250(i2c)
 #gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
 pacl = 0
 for i in range(1000):
-    acl = array(IMU.getAccel())*0.1+pacl*0.9
+    acl = array(IMU.getAccel())*0.5+pacl*0.5
     base.write(str(acl[0]))
     pacl = acl
-    time.sleep(0.2)
+    time.sleep(0.01)
