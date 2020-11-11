@@ -36,10 +36,8 @@ class AMG8833:
             # temperature is reported as 12-bit twos complement
             # check if temperature is negative
             if(temperature & (1 << 11)):
-            {
                 temperature &= ~(1 << 11);
                 temperature = temperature * -1;
-            }
 
           DegreesC = temperature * 0.25;
           return DegreesC;
