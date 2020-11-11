@@ -33,7 +33,7 @@ MONOPORT  = "/dev/ttyUSB0"
 base = MONO.MONO(MONOPORT)
 
 ret,frame = cap.read()
-base.sendImg(frame)
+a = base.sendImg(frame)
 cap.release()
 sys.exit()
 
