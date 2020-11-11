@@ -21,7 +21,7 @@ import smbus
 import time
 import serial
 
-size = [320,240]
+size = [160,120]
 fps = 5
 
 cap = cv2.VideoCapture(0)

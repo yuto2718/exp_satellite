@@ -43,10 +43,10 @@ class MONO:
         encodeParam = [int(cv2.IMWRITE_JPEG_QUALITY),70]
         _, imgEncoded = cv2.imencode('.jpg', im, encodeParam)
         self.write(imgEncoded.tostring())
-        self.write("\n")
+        #self.write("\n")
 
     def recvImg(self):
         rIm = self.readLine()
-        rImjpg = fromstring(rIm,dtype = 'uint8')
+        img_bytes = b"".join(rIm)
 
-        return rImjpg
+        return img_bytes
