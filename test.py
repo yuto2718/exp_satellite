@@ -1,9 +1,25 @@
 from numpy import*
 #from matplotlib.pyplot import*
 import cv2
+import sys
 
-#cascadePathM = r"C:\Users\yuto1\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2\data\haarcascade_eye.xml"
-cascadePathM = "/home/pi/.local/lib/python3.7/site-packages/cv2/data/haarcascade_eye.xml"
+size = [320,240]
+fps = 5
+
+cap = cv2.VideoCapture(0)
+cap.set(3, size[0])
+cap.set(4, size[1])
+cap.set(5, fps)
+
+MONOPORT  = "/dev/ttyUSB0"
+base = MONO.MONO(MONOPORT)
+
+ret,frame = cap.read()
+base.sendImg(frame)
+
+sys.exit()
+cascadePathM = r"C:\Users\yuto1\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2\data\haarcascade_eye.xml"
+#cascadePathM = "/home/pi/.local/lib/python3.7/site-packages/cv2/data/haarcascade_eye.xml"
 
 size = [640,480]
 fps = 5
