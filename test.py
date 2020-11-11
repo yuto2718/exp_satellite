@@ -34,8 +34,13 @@ base = MONO.MONO(MONOPORT)
 
 ret,frame = cap.read()
 base.sendImg(frame)
-
+cap.release()
 sys.exit()
+
+
+
+
+
 cascadePathM = r"C:\Users\yuto1\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2\data\haarcascade_eye.xml"
 #cascadePathM = "/home/pi/.local/lib/python3.7/site-packages/cv2/data/haarcascade_eye.xml"
 

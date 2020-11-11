@@ -42,7 +42,7 @@ class MONO:
     def sendImg(self, im):
         encodeParam = [int(cv2.IMWRITE_JPEG_QUALITY),70]
         _, imgEncoded = cv2.imencode('.jpg', im, encodeParam)
-        self.write(imgEncoded.tostring())
+        self.write(imgEncoded.tostring()+"\n")
 
     def recvImg(self):
         rIm = self.readLine()
