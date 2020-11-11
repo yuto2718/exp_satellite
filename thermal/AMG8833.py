@@ -22,8 +22,7 @@ class AMG8833:
 
 
         def __setup(self):
-            self.__writeReg(AMG88_ADDR,AMG8833.FPSC, 0xA)
-            self.__writeReg()
+            self.__writeReg(self.i2c_address,AMG8833.FPSC, 0xA)
 
         def __writeReg(self,reg_address, data):
             self.bus.write_byte_data(self.i2c_address,reg_address,data)

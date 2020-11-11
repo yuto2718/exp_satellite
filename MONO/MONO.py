@@ -34,8 +34,9 @@ class MONO:
         return self.ser.readline().decode()
 
     def __del__(self):
-        self.ser.close()
-        del self.ser
+        pass
+        #self.ser.close()
+        #del self.ser
         #print("closed:{0}".format(self.__PORT))
 
     def sendImg(self, im):
