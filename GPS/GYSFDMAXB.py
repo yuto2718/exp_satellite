@@ -1,9 +1,9 @@
 import serial
 import time
-from GPS.micropyGPS import MicropyGPS 
+from GPS.micropyGPS import MicropyGPS
 
 # load packet per update()
-PACKET_RATE = 100
+PACKET_RATE = 10
 
 class GYSFDMAXB:
     # serial : serial.Serial instance
@@ -19,7 +19,7 @@ class GYSFDMAXB:
     def update(self):
         self.serial.readline()
         for i in range(PACKET_RATE):
-            sentence = self.serial.readline().decode('utf-8')
+            sentence = self.serial.readline().decode('ascii')
             if sentence[0] != '$':
                 continue
             for x in sentence:
