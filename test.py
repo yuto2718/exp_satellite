@@ -1,5 +1,5 @@
 from numpy import*
-from matplotlib.pyplot import*
+#from matplotlib.pyplot import*
 import cv2
 
 #cascadePathM = r"C:\Users\yuto1\AppData\Local\Programs\Python\Python37\Lib\site-packages\cv2\data\haarcascade_eye.xml"
