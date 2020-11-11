@@ -17,7 +17,7 @@ cascade = cv2.CascadeClassifier(cascadePathM)
 
 mouth = []
 name =[]
-print(start)
+print("start")
 while True:
     ret,frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
