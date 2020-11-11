@@ -11,6 +11,7 @@ class AMG8833:
         TTHL = 0x0E
         INT0 = 0x10
         T01L = 0x80
+        TRS  = 0x80
 
         def __init__(self, bus):
                 self.bus = bus
@@ -21,4 +22,24 @@ class AMG8833:
 
 
         def __setup(self):
-            pass
+            self.__writeReg(AMG88_ADDR,AMG8833.FPSC, 0xA)
+            self.__writeReg()
+
+        def __writeReg(self,reg_address, data):
+            self.bus.write_byte_data(self.i2c_address,reg_address,data)
+
+        def getPixelTemperature(self, pixelArr):
+            pixelLowRegister = TRS + (2 * pixelAddr);
+            tempLow = self.bus.read_byte_data(self.i2c_address,pixelLowRegister)
+            tempHigh = self.bus.read_byte_data(self.i2c_address,pixelLowRegister+1)
+            temperature = tempLow + tempHigh*0xFF
+            # temperature is reported as 12-bit twos complement
+            # check if temperature is negative
+            if(temperature & (1 << 11)):
+            {
+                temperature &= ~(1 << 11);
+                temperature = temperature * -1;
+            }
+
+          DegreesC = temperature * 0.25;
+          return DegreesC;

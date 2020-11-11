@@ -3,14 +3,17 @@ sys.path.append("/home/pi/Documents/exp_satellite")
 
 from nineAxis import MPU9250
 from thermal import BME280
+from thermal import AMG8833
 from GPS import GYSFDMAXB
 from MONO import MONO
+
 from numpy import*
 
 
 import importlib
 importlib.reload(MPU9250)
 importlib.reload(BME280)
+importlib.reload(AMG8833)
 importlib.reload(GYSFDMAXB)
 importlib.reload(MONO)
 
@@ -27,12 +30,20 @@ gpsserial = serial.Serial(GPSPORT, 57600)
 base = MONO.MONO(MONOPORT)
 IMU = MPU9250.MPU9250(i2c)
 thermal = BME280.BME280(i2c)
+AMG = AMG8833.AMG8833(i2c)
 print("IMU,thrmal init")
-gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
+#gps = GYSFDMAXB.GYSFDMAXB(gpsserial)
 
+#temps = zeros((64))
+
+for i in range(16):
+    base.write(str(AMG.getPixelTemperature(i)))
+
+"""
 for i in range(10):
     timestamp = gps.getTimestamp()
     print(timestamp)
+"""
 
 """
 pdata = 0
