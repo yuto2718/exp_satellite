@@ -14,6 +14,7 @@ raspi = MONO.MONO(port = "COM4")
 im = raspi.recvImg()
 
 sys.exit()
+
 data = []
 
 if raspi.isConnected:

@@ -3,7 +3,7 @@
 import cv2
 import serial
 #import gc
-#import base64
+import base64
 
 
 
@@ -42,11 +42,14 @@ class MONO:
     def sendImg(self, im):
         encodeParam = [int(cv2.IMWRITE_JPEG_QUALITY),70]
         _, imgEncoded = cv2.imencode('.jpg', im, encodeParam)
-        self.write(imgEncoded.tostring())
+        self.write(base64.b64encode(imgEncoded.tostring()))
         #self.write("\n")
 
     def recvImg(self):
-        rIm = self.readLine()
-        img_bytes = b"".join(rIm)
+        buf = self.ser.readline()
+        rIm = base64.b64decode(buf)
+        rImjpg = fromstring(rIm,dtype = 'uint8')
+        return rImjpg
+        #img_bytes = b"".join(rIm)
 
-        return img_bytes
+        #return img_bytes
