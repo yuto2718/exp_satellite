@@ -28,7 +28,7 @@ class AMG8833:
             self.bus.write_byte_data(self.i2c_address,reg_address,data)
 
         def getPixelTemperature(self, pixelArr):
-            pixelLowRegister = TRS + (2 * pixelAddr);
+            pixelLowRegister = AMG8833.TRS + (2 * pixelAddr);
             tempLow = self.bus.read_byte_data(self.i2c_address,pixelLowRegister)
             tempHigh = self.bus.read_byte_data(self.i2c_address,pixelLowRegister+1)
             temperature = tempLow + tempHigh*0xFF
