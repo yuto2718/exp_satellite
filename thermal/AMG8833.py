@@ -38,6 +38,5 @@ class AMG8833:
             if(temperature & (1 << 11)):
                 temperature &= ~(1 << 11);
                 temperature = temperature * -1;
-
-          DegreesC = temperature * 0.25;
-          return DegreesC;
+            DegreesC = temperature*0.25
+            return DegreesC;
