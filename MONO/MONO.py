@@ -44,6 +44,7 @@ class MONO:
         _, imgEncoded = cv2.imencode('.jpg', im, encodeParam)
         sentdata = base64.b64encode(imgEncoded.tostring())
         self.write(sentdata)
+        return sentdata
         #self.write("\n")
 
     def recvImg(self):
