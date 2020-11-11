@@ -38,6 +38,7 @@ print("IMU,thrmal init")
 
 for i in range(16):
     base.write(str(AMG.getPixelTemperature(i)))
+    print(AMG.getPixelTemperature(i))
 
 """
 for i in range(10):
