@@ -6,9 +6,10 @@ import importlib
 importlib.reload(MONO)
 
 raspi = MONO.MONO("COM4")
+datad = []
 if raspi.isConnected:
-    for i in range(10):
-        raspi.write(i*0.1)
+    for i in range(16):
+        data.append(raspi.readLine())
         time.sleep(0.2)
 
 del raspi
