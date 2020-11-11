@@ -45,7 +45,7 @@ class MONO:
         self.write(imgEncoded.tostring())
 
     def recvImg(self):
-        rIm = self.readLine(buf)
+        rIm = self.readLine()
         rImjpg = fromstring(rIm,dtype = 'uint8')
 
         return rImjpg

@@ -2,6 +2,24 @@ from numpy import*
 #from matplotlib.pyplot import*
 import cv2
 import sys
+sys.path.append("/home/pi/Documents/exp_satellite")
+
+from nineAxis import MPU9250
+from thermal import BME280
+from thermal import AMG8833
+from GPS import GYSFDMAXB
+from MONO import MONO
+
+import importlib
+importlib.reload(MPU9250)
+importlib.reload(BME280)
+importlib.reload(AMG8833)
+importlib.reload(GYSFDMAXB)
+importlib.reload(MONO)
+
+import smbus
+import time
+import serial
 
 size = [320,240]
 fps = 5
