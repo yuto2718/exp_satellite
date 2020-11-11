@@ -25,7 +25,7 @@ MONOPORT  = "/dev/ttyUSB0"
 GPSPORT = "/dev/ttyAMA0"
 
 i2c = smbus.SMBus(1)
-gpsserial = serial.Serial(GPSPORT, 57600)
+gpsserial = serial.Serial(GPSPORT, 9600)
 
 base = MONO.MONO(MONOPORT)
 IMU = MPU9250.MPU9250(i2c)
