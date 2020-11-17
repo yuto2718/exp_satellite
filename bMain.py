@@ -12,6 +12,7 @@ importlib.reload(MONO)
 raspi = MONO.MONO(port = "COM4")
 
 im = raspi.recvImg()
+del raspi
 
 sys.exit()
 

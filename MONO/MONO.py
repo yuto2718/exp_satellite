@@ -50,8 +50,8 @@ class MONO:
     def recvImg(self):
         buf = self.ser.readline()
         rIm = base64.b64decode(buf)
-        rImjpg = fromstring(rIm,dtype = 'uint8')
-        return rImjpg
+        rImjpg = fromstring(rIm, dtype = 'uint8')
+        return rImjpg,buf
         #img_bytes = b"".join(rIm)
 
         #return img_bytes
