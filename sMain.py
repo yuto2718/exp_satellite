@@ -46,7 +46,7 @@ for i in range(10):
     print(timestamp)
 """
 
-
+"""
 pdata = 0
 for i in range(1000):
     data = array(thermal.readData())*0.2+pdata*0.8
@@ -54,13 +54,12 @@ for i in range(1000):
     base.write(str(data[0]))
     pdata = data
     time.sleep(0.1)
-
-
 """
+
+
 pacl = 0
 for i in range(1000):
     acl = array(IMU.getAccel())*0.2+pacl*0.8
     base.write(str(acl[2]))
     pacl = acl
     time.sleep(0.1)
-"""
