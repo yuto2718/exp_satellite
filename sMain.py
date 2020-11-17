@@ -51,7 +51,7 @@ pdata = 0
 for i in range(1000):
     data = array(thermal.readData())*0.2+pdata*0.8
     print(data)
-    base.write(str(data))
+    base.write(str(data[0]))
     pdata = data
     time.sleep(0.1)
 
