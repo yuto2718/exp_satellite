@@ -17,7 +17,7 @@ importlib.reload(AMG8833)
 importlib.reload(GYSFDMAXB)
 importlib.reload(MONO)
 
-import smbus
+#import smbus
 import time
 import serial
 
@@ -29,13 +29,13 @@ cap.set(3, size[0])
 cap.set(4, size[1])
 cap.set(5, fps)
 
-MONOPORT  = "/dev/ttyUSB0"
-base = MONO.MONO(MONOPORT)
+#MONOPORT  = "/dev/ttyUSB0"
+#base = MONO.MONO(MONOPORT)
 
-ret,frame = cap.read()
-a = base.sendImg(frame)
-cap.release()
-sys.exit()
+#ret,frame = cap.read()
+#a = base.sendImg(frame)
+#cap.release()
+#sys.exit()
 
 
 
@@ -64,12 +64,11 @@ while True:
 
     if len(mouthCordiante) >0:
         print(mouthCordiante)
-        """
+
         for rect in mouthCordiante:
             mouth.append(frame[rect[0]:rect[0]+rect[2], rect[1]:rect[1]+rect[3]])
             cv2.rectangle(frame, tuple(rect[0:2]), tuple(rect[0:2] + rect[2:4]),(255,255,255),thickness=2)
-        """
-    """
+
     cv2.imshow("mouth", frame)
 
     k = cv2.waitKey(1)&0xff
@@ -77,4 +76,3 @@ while True:
         cap.release()
         cv2.destroyAllWindows()
         quit()
-    """
